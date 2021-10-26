@@ -4,7 +4,7 @@ import re
 import pandas as pd
 
 
-def download(y, m):
+def download(y, m, end_y, end_m):
     table = pd.DataFrame(columns=['主题', '杂志', '时间', '文章名','简介'])
     while y >= 16:
         send_headers = {
@@ -82,7 +82,7 @@ def download(y, m):
         if m < 1:
             m = 12
             y = y-1
-        if y == 16 and m == 1:
+        if y == end_y and m == end_m:
             print table
             table.to_csv("D:/mr-gut.csv", sep="\t", index=False)
             return table
@@ -91,4 +91,4 @@ def download(y, m):
 
 
 if __name__ == '__main__':
-    table1 = download(21, 10)
+    table1 = download(21, 10, 16, 1)
